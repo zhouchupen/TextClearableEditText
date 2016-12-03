@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.scnu.zhou.widget.TextClearableEditText
+        android:id="@+id/et_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="用户名"
+        app:hint="请输入用户名"
+        app:lineColor="#97CC00"
+        app:singleline="true"
+        android:layout_marginTop="15dp">
+
+    </com.scnu.zhou.widget.TextClearableEditText>
+
+    <com.scnu.zhou.widget.TextClearableEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="密码"
+        app:hint="请输入密码"
+        app:lineColor="#97CC00"
+        app:singleline="true"
+        app:password="true"
+        android:layout_marginTop="15dp">
+
+    </com.scnu.zhou.widget.TextClearableEditText>
+
+</LinearLayout>

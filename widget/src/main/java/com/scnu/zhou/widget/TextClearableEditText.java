@@ -1,8 +1,9 @@
-package com.scnu.zhou.widget;
+package com.scnu.zhou.signer.ui.widget.edit;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scnu.zhou.signer.R;
+
 /**
  * Created by zhou on 16/9/2.
  */
@@ -24,6 +27,7 @@ public class TextClearableEditText extends LinearLayout{
     private String hint;
     private int lineColor = Color.parseColor("#dddddd");    // 设置底部线条默认颜色
     private boolean singleline = true;   // 是否单行输入
+    private Drawable clearDrawable = null;    // 清除按钮
     private boolean password;   //输入格式
 
     private TextView tv_title;
@@ -54,6 +58,7 @@ public class TextClearableEditText extends LinearLayout{
         hint = a.getString(R.styleable.TextClearableEditText_hint);
         lineColor = a.getColor(R.styleable.TextClearableEditText_lineColor, Color.parseColor("#dddddd"));
         singleline = a.getBoolean(R.styleable.TextClearableEditText_singleline, true);
+        clearDrawable = a.getDrawable(R.styleable.TextClearableEditText_clearDrawable);
         password = a.getBoolean(R.styleable.TextClearableEditText_password,false);
 
         a.recycle();
@@ -78,36 +83,39 @@ public class TextClearableEditText extends LinearLayout{
         v_line.setBackgroundColor(lineColor);
 
         btn_clear = (Button) findViewById(R.id.btn_clear);
-
-        btn_clear.setOnClickListener(new OnClickListener() {
+        if (clearDrawable != null){
+            //btn_clear.setVisibility(View.VISIBLE);
+            btn_clear.setBackground(clearDrawable);
+            btn_clear.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     et_text.setText("");
                 }
             });
 
-        et_text.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            et_text.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if (!TextUtils.isEmpty(et_text.getText().toString())){
-                    btn_clear.setVisibility(View.VISIBLE);
                 }
-                else{
-                    btn_clear.setVisibility(View.GONE);
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if (!TextUtils.isEmpty(et_text.getText().toString())){
+                        btn_clear.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        btn_clear.setVisibility(View.GONE);
+                    }
                 }
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
+                public void afterTextChanged(Editable s) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     public String getText(){
@@ -131,5 +139,14 @@ public class TextClearableEditText extends LinearLayout{
      */
     public void addTextChangedListener(TextWatcher watcher){
         et_text.addTextChangedListener(watcher);
+    }
+
+    /**
+     * 将光标移动到末尾
+     */
+    public void setSelectionAtEnd(){
+
+        et_text.setSelection(et_text.getText().length());
+
     }
 }

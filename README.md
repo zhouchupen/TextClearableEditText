@@ -23,7 +23,7 @@ and:
 
 ```gradle
 dependencies {
-    compile 'com.github.zhouchupen:TextClearableEditText:v1.0'
+    compile 'com.github.zhouchupen:TextClearableEditText:v1.1'
 }
 ```
 
